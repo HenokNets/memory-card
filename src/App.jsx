@@ -5,6 +5,7 @@ import Cards from './components/Cards'
 
 function App() {
   const [images, setImages] = useState([]);
+  const [clickedImages, setClickedImages] = useState([]);
   useEffect(() => {
     async function fetchImages() {
       try {
@@ -26,11 +27,23 @@ function App() {
 
     fetchImages();
   }, []);
+  function shuffle() {
+    const shuffled = [...images];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i+1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
 
+      setImages(shuffled);
+    }
+  }
+  function handleClick(event) {
+    setClickedImages(event.target.id)
+    shuffle();
+  }
   return (
     <>
       <Header />
-      <Cards images={images} />
+      <Cards images={images} handleClick={handleClick} />
       
     </>
   )
