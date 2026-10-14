@@ -1,10 +1,16 @@
-export default function Header( { score, highScore }) {
+import "./Header.css";
+export default function Header({ score, highScore }) {
   return (
     <header>
-      <div>
-        <h1>Superheroes Memory Game</h1>
-        <p>Score: {score} </p>
-        <p>Best score: {highScore} </p>
+      <div className="score-and-game-title">
+        <div>
+          <h1>Superheroes Memory Game</h1>
+        </div>
+
+        <div>
+          <p>Score: {score} </p>
+          <p>Best score: {highScore} </p>
+        </div>
       </div>
 
       <div>
