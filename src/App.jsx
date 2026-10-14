@@ -6,6 +6,8 @@ import Cards from './components/Cards'
 function App() {
   const [images, setImages] = useState([]);
   const [clickedImages, setClickedImages] = useState([]);
+  const [score, setScore] = useState(0)
+  const [highScore, setHighScore] = useState(0);
   useEffect(() => {
     async function fetchImages() {
       try {
@@ -32,17 +34,27 @@ function App() {
     for (let i = shuffled.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i+1));
       [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-
-      setImages(shuffled);
     }
+    setImages(shuffled);
   }
   function handleClick(event) {
-    setClickedImages(event.target.id)
+    setClickedImages([...clickedImages, event.target.id])
+    if (clickedImages.includes(event.target.id)) {
+      if (clickedImages.length > highScore) {
+        setHighScore(clickedImages.length)
+      } 
+      setScore(0)
+      setClickedImages([])
+    } else {
+      setScore(score+1)
+    }
+
     shuffle();
   }
+  console.log(clickedImages)
   return (
     <>
-      <Header />
+      <Header score={score} highScore={highScore} />
       <Cards images={images} handleClick={handleClick} />
       
     </>

@@ -1,10 +1,10 @@
-export default function Header() {
+export default function Header( { score, highScore }) {
   return (
     <header>
       <div>
         <h1>Superheroes Memory Game</h1>
-        <p>Score: </p>
-        <p>Best score: </p>
+        <p>Score: {score} </p>
+        <p>Best score: {highScore} </p>
       </div>
 
       <div>
